@@ -1,6 +1,6 @@
 {
   "name": "My CloudShell",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "Quick access to my sandboxes",
   "permissions": ["storage", "http://*/", "https://*/"],
   "browser_action": {

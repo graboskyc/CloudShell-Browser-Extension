@@ -58,11 +58,9 @@ function parseSboxList(resp, portaluri) {
     });
   }
   else {
-    var li = ul.appendChild(document.createElement('li'));
-    var a = li.appendChild(document.createElement('a'));
-    a.href = portaluri + "/RM/Topology";
-    a.appendChild(document.createTextNode("No active sandboxes for your user. Click here to view Blueprints"));
-    a.addEventListener('click', onAnchorClick);
+    popupDiv.innerHTML = '<div class="alert alert-warning" role="alert"> \
+    <p style="font-weight:bold;font-size:20px;">You have no active sandboxes.</p> \
+    <p>Press the "Blueprint Catalog" button below to reserve a Blueprint now.</p></div>';
   }
 } // end parseSboxList
 
