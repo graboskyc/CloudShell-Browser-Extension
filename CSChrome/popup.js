@@ -5,38 +5,66 @@ function onAnchorClick(event) {
   return false;
 }
 
+function updateSboxCell(resp, cell) {
+  var obj = JSON.parse(resp);
+  document.getElementById(cell).innerHTML = obj.end_time;
+}
+
+// make another callback with token to get more details on individual sandboxes
+function getSboxDetail(sboxid, uriroot, cell, authToken) {
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", uriroot+"/api/v2/sandboxes/"+sboxid, true);
+  xhr.setRequestHeader("Content-Type","application/json");
+  xhr.setRequestHeader("Authorization","Basic " + authToken);
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4) {
+      updateSboxCell(xhr.responseText, cell);
+    }
+  }
+  xhr.send();
+} // end getSboxDetail
+
 // takes sandbox response json and builds UI
-function parseSboxList(resp, portaluri) {
+function parseSboxList(resp, uriroot, portaluri, authToken) {
 
   // remove loading gif from div and create an unordered list
   var popupDiv = document.getElementById('div_sboxlist');
   popupDiv.innerHTML = "";
-  var ul = popupDiv.appendChild(document.createElement('ul'));
-  ul.classList.add("list-group");
+
+  var tbl = popupDiv.appendChild(document.createElement('table'));
+  tbl.classList.add("table");
+  tbl.classList.add("table-hover");
+  var thead = tbl.appendChild(document.createElement('thead'));
+  thead.innerHTML = "<tr><td>Sandbox Name</td><td>End Date</td><td>Status</td></tr>";
+  var tbody = tbl.appendChild(document.createElement('tbody'));
 
   var sbArray = JSON.parse(resp); 
 
   if (sbArray.length > 0) {
-
+    var ct = 0;
     sbArray.forEach(function(sb) {
+      ct++;
       // every sandbox gets a list item (li) which is a link
       // inside that is a badge on the right with sandbox status
-      var li = ul.appendChild(document.createElement('li'));
-      li.classList.add("list-group-item");
+      var row = tbody.appendChild(document.createElement('tr'));
+      var cell1 = row.appendChild(document.createElement('td'));
+      var cell2 = row.appendChild(document.createElement('td'));
+      cell2.id = "cell2_"+ct;
+      var cell3 = row.appendChild(document.createElement('td'));
 
       // add Glyphicons
-      var i = li.appendChild(document.createElement('span'));
+      var i = cell1.appendChild(document.createElement('span'));
       i.classList.add("glyphicon");
       i.classList.add("glyphicon-option-vertical");
 
       // set link
-      var a = li.appendChild(document.createElement('a'));
+      var a = cell1.appendChild(document.createElement('a'));
       a.href = portaluri + "/RM/Diagram/Index/" + sb.id;
       a.appendChild(document.createTextNode(sb.name));
       a.addEventListener('click', onAnchorClick);
 
       // do the state badge on right
-      var s = li.appendChild(document.createElement('span'));
+      var s = cell3.appendChild(document.createElement('span'));
       s.classList.add("label");
       if (sb.state == "Ready") {
         s.classList.add("label-success");
@@ -53,8 +81,9 @@ function parseSboxList(resp, portaluri) {
       else {
         s.classList.add("label-info");
       }
-      s.classList.add("labelright");
       s.innerHTML = sb.state;
+
+      getSboxDetail(sb.id, uriroot, "cell2_"+ct, authToken);
     });
   }
   else {
@@ -72,7 +101,7 @@ function getSboxes(authToken, uriroot, portaluri) {
   xhr.setRequestHeader("Authorization","Basic " + authToken);
   xhr.onreadystatechange = function() {
     if (xhr.readyState == 4) {
-      parseSboxList(xhr.responseText, portaluri);
+      parseSboxList(xhr.responseText, uriroot, portaluri, authToken);
     }
   }
   xhr.send();
