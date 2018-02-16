@@ -12,3 +12,7 @@ The info the extension needs is as follows:
 * Domain - the domain within CloudShell that you want to show active sandboxes in
 * API URI - the CloudShell REST API endpoint (get this from your administrator) - no trailing slash but starts with http:// or https://
 * Portal URI - the address of your CloudShell portal you log into - no trailing slash but starts with http:// or https://
+
+![](Screenshots/01.jpg)
+
+![](Screenshots/02.jpg)
