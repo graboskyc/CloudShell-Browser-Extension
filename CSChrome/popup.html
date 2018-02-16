@@ -7,6 +7,9 @@
       <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
       <title>Bootstrap 101 Template</title>
       <link href="css/bootstrap.min.css" rel="stylesheet">
+      <style>
+        .labelright {float: right;}
+      </style>
   </head>
   <body style="height:600px;width:400px;">
       <div class="container">
@@ -17,10 +20,17 @@
         <div id='div_sboxlist'>
           <img src="loading.gif" id="img_loading" />
         </div>
+      </div>
 
-        <button id="btn_bps" type="button" class="btn btn-lg btn-info">Blueprint Catalog</button> &nbsp;
-        <button id="btn_logout" type="button" class="btn btn-lg btn-danger">Logout</button>
-
+      <div class="footer navbar-fixed-bottom" style="text-align:center;margin-bottom:5px;">
+        <button id="btn_bps" type="button" class="btn btn-sm btn-info">
+            <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+            Blueprint Catalog
+        </button> &nbsp;
+        <button id="btn_logout" type="button" class="btn btn-sm btn-danger">
+          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+          Logout
+        </button>
       </div>
     <script src='popup.js'></script>
   </body>
