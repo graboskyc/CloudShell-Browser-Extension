@@ -21,15 +21,15 @@ function parseSboxList(resp, portaluri) {
     });
     var li = ul.appendChild(document.createElement('li'));
     var a = li.appendChild(document.createElement('a'));
-    a.href = portaluri;
+    a.href = portaluri + "/RM/Topology";
     a.appendChild(document.createTextNode("Click here to view Blueprints"));
     a.addEventListener('click', onAnchorClick);
   }
   else {
     var li = ul.appendChild(document.createElement('li'));
     var a = li.appendChild(document.createElement('a'));
-    a.href = portaluri;
-    a.appendChild(document.createTextNode("No active sandboxes for your user. <br />Click here to view Blueprints"));
+    a.href = portaluri + "/RM/Topology";
+    a.appendChild(document.createTextNode("No active sandboxes for your user. Click here to view Blueprints"));
     a.addEventListener('click', onAnchorClick);
   }
 }
