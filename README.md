@@ -6,6 +6,8 @@ Permissions are set to need permissions "for every site" because the extension d
 
 [However the source code is open source so feel free to browse it if you are concerned](https://github.com/graboskyc/CloudShell-Browser-Extension).
 
+[You can get the plugin here](https://chrome.google.com/webstore/detail/my-cloudshell/ldpfpoekjebmlglikmmebilfiomcmhme).
+
 The info the extension needs is as follows:
 * Username - username to CloudShell
 * Password - password to CloudShell
