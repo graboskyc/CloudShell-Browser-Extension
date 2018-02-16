@@ -24,6 +24,11 @@ function parseSboxList(resp, portaluri) {
       var li = ul.appendChild(document.createElement('li'));
       li.classList.add("list-group-item");
 
+      // add Glyphicons
+      var i = li.appendChild(document.createElement('span'));
+      i.classList.add("glyphicon");
+      i.classList.add("glyphicon-option-vertical");
+
       // set link
       var a = li.appendChild(document.createElement('a'));
       a.href = portaluri + "/RM/Diagram/Index/" + sb.id;
@@ -88,6 +93,10 @@ chrome.storage.local.get(null, function (result) {
   
   document.getElementById("btn_bps").addEventListener('click', function() {
     chrome.tabs.create({ url: result["csportal"] + "/RM/Topology" });
+  });
+
+  document.getElementById("btn_branding").addEventListener('click', function() {
+    chrome.tabs.create({ url: "https://www.quali.com" });
   });
 
   console.log(result);
