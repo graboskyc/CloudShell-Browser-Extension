@@ -7,6 +7,7 @@ function onAnchorClick(event) {
 
 function parseSboxList(resp, portaluri) {
   var popupDiv = document.getElementById('div_sboxlist');
+  popupDiv.innerHTML = "";
   var ul = popupDiv.appendChild(document.createElement('ul'));
   ul.classList.add("list-group");
 
