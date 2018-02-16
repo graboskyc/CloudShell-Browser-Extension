@@ -1,15 +1,78 @@
 <!DOCTYPE HTML>
-<html>
-  <body>
-    <h2>Please Login</h2>
-    <div id='div_sboxlist'>
-        <input type="text" name="txt_un" id="txt_un" placeholder="Username" />
-        <input type="text" name="txt_pw" id="txt_pw" placeholder="Password" />
-        <input type="text" name="txt_dom" id="txt_dom" placeholder="Domain" />
-        <input type="text" name="txt_dom" id="txt_uri" placeholder="API URL" />
-        <input type="text" name="txt_dom" id="txt_portal" placeholder="Portal URL" />
-        <button id="btn_login">Login</button>
-    </div>
+<html lang="en" style="height:600px;width:400px;">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+      <title>Bootstrap 101 Template</title>
+      <link href="css/bootstrap.min.css" rel="stylesheet">
+      <style>
+      body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+      </style>
+  </head>
+  <body style="height:600px;width:400px;">
+      <div class="container">
+        <form class="form-signin">
+        <h2 class="form-signin-heading">Please Login</h2>
+        <div id='div_sboxlist'>
+            <label for="txt_un" class="sr-only">Username</label>
+            <input type="text" name="txt_un" id="txt_un" placeholder="Username"  class="form-control" />
+
+            <label for="txt_pw" class="sr-only">Password</label>
+            <input type="text" name="txt_pw" id="txt_pw" placeholder="Password" class="form-control" />
+
+            <label for="txt_dom" class="sr-only">Domain</label>
+            <input type="text" name="txt_dom" id="txt_dom" placeholder="Domain" class="form-control" />
+
+            <label for="txt_uri" class="sr-only">API URL</label>
+            <input type="text" name="txt_uri" id="txt_uri" placeholder="API URL" class="form-control" />
+
+            <label for="txt_portal" class="sr-only">Portal URL</label>
+            <input type="text" name="txt_portal" id="txt_portal" placeholder="Portal URL" class="form-control" />
+            <button id="btn_login" class="btn btn-lg btn-primary btn-block">Login</button>
+        </div>
+        </form>
+      </div>
     <script src='login.js'></script>
   </body>
 </html>

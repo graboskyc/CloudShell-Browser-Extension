@@ -8,22 +8,22 @@ function onAnchorClick(event) {
 function parseSboxList(resp, portaluri) {
   var popupDiv = document.getElementById('div_sboxlist');
   var ul = popupDiv.appendChild(document.createElement('ul'));
+  ul.classList.add("list-group");
 
   var sbArray = JSON.parse(resp); 
 
   if (sbArray.length > 0) {
     sbArray.forEach(function(sb) {
       var li = ul.appendChild(document.createElement('li'));
+      li.classList.add("list-group-item");
       var a = li.appendChild(document.createElement('a'));
       a.href = portaluri + "/RM/Diagram/Index/" + sb.id;
       a.appendChild(document.createTextNode(sb.name));
       a.addEventListener('click', onAnchorClick);
+      var s = li.appendChild(document.createElement('span'));
+      s.classList.add("badge");
+      s.innerHTML = sb.state;
     });
-    var li = ul.appendChild(document.createElement('li'));
-    var a = li.appendChild(document.createElement('a'));
-    a.href = portaluri + "/RM/Topology";
-    a.appendChild(document.createTextNode("Click here to view Blueprints"));
-    a.addEventListener('click', onAnchorClick);
   }
   else {
     var li = ul.appendChild(document.createElement('li'));
@@ -53,6 +53,10 @@ chrome.storage.local.get(null, function (result) {
       console.log("Cleared storage");
       window.location = "login.html";
     });
+  });
+  
+  document.getElementById("btn_bps").addEventListener('click', function() {
+    chrome.tabs.create({ url: result["csportal"] + "/RM/Topology" });
   });
 
   console.log(result);
