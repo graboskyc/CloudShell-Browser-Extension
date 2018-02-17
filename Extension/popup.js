@@ -7,7 +7,8 @@ function onAnchorClick(event) {
 
 function updateSboxCell(resp, cell) {
   var obj = JSON.parse(resp);
-  document.getElementById(cell).innerHTML = obj.end_time;
+  var localEnd = new Date(obj.end_time).toLocaleString();
+  document.getElementById(cell).innerHTML = localEnd;
 }
 
 // make another callback with token to get more details on individual sandboxes
@@ -35,7 +36,7 @@ function parseSboxList(resp, uriroot, portaluri, authToken) {
   tbl.classList.add("table");
   tbl.classList.add("table-hover");
   var thead = tbl.appendChild(document.createElement('thead'));
-  thead.innerHTML = "<tr><td>Sandbox Name</td><td>End Date</td><td>Status</td></tr>";
+  thead.innerHTML = "<tr><th>Sandbox Name</th><th>End Date</th><th>Status</th></tr>";
   var tbody = tbl.appendChild(document.createElement('tbody'));
 
   var sbArray = JSON.parse(resp); 
