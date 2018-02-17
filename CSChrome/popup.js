@@ -52,11 +52,6 @@ function parseSboxList(resp, uriroot, portaluri, authToken) {
       cell2.id = "cell2_"+ct;
       var cell3 = row.appendChild(document.createElement('td'));
 
-      // add Glyphicons
-      var i = cell1.appendChild(document.createElement('span'));
-      i.classList.add("glyphicon");
-      i.classList.add("glyphicon-option-vertical");
-
       // set link
       var a = cell1.appendChild(document.createElement('a'));
       a.href = portaluri + "/RM/Diagram/Index/" + sb.id;
