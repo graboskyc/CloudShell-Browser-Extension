@@ -1,3 +1,17 @@
+function getUrlVal(key){
+  var url = new URL(window.location);
+  //edge doesn't yet support
+  // url.searchParams.get
+  var retVal = null;
+  var qsArray = url.search.replace("?","").split("&");
+  qsArray.forEach(function(kvp){
+    if(kvp.indexOf(key) !== -1) {
+      retVal = kvp.split("=")[1];
+    }
+  });
+  return retVal;
+} //end getUrlVal
+
 function sboxDetails(response){
   console.log(response);
   // remove loading gif from div and create an unordered list
@@ -12,8 +26,7 @@ function sboxDetails(response){
   var tbody = tbl.appendChild(document.createElement('tbody'));
 
   var sbObj = JSON.parse(response); 
-  var url = new URL(window.location);
-  var sboxname = url.searchParams.get('name');
+  var sboxname = getUrlVal('name');
   document.getElementById('jtitle').innerText = sboxname;
 
   sbObj.forEach(function(c) {
@@ -30,8 +43,7 @@ function sboxDetails(response){
 
 // make another callback with token to get more details on individual sandboxes
 function getSbox(authToken, uriroot) {
-  var url = new URL(window.location);
-  var sboxid = url.searchParams.get('id');
+  var sboxid = getUrlVal('id');
   var xhr = new XMLHttpRequest();
   xhr.open("GET", uriroot+"/api/v2/sandboxes/"+sboxid+"/components", true);
   xhr.setRequestHeader("Content-Type","application/json");
@@ -52,7 +64,6 @@ chrome.storage.local.get(null, function (result) {
     chrome.tabs.create({ url: "https://www.quali.com" });
   });
 
-  var url = new URL(window.location);
-  var token = decodeURIComponent(url.searchParams.get('token'));
+  var token = decodeURIComponent(getUrlVal('token'));
   getSbox(token, result["csuri"]);
 });
