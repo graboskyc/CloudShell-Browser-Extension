@@ -1,5 +1,7 @@
 # CloudShell-Browser-Extension
 
+## Background
+
 This is a simple browser extension (Chrome and Edge) that let's you see your running sandboxes for a [CloudShell](https://www.quali.com/) install.
 
 Permissions are set to need permissions "for every site" because the extension doesn't know the address of your CloudShell server ahead of time. Once I know how to solve this, I will restrict it further.
@@ -15,6 +17,15 @@ The info the extension needs is as follows:
 * API URI - the CloudShell REST API endpoint (get this from your administrator) - no trailing slash but starts with http:// or https://
 * Portal URI - the address of your CloudShell portal you log into - no trailing slash but starts with http:// or https://
 
+## Screenshots
+Login prompt:
+
 ![](Screenshots/01.jpg)
 
+View of running sandboxes:
+
 ![](Screenshots/02.jpg)
+
+Digging in to see contents of a running sandbox:
+
+![](Screenshots/03.jpg)

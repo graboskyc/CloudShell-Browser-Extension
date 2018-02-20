@@ -9,7 +9,7 @@ function getUrlVal(key){
       retVal = kvp.split("=")[1];
     }
   });
-  return retVal;
+  return decodeURIComponent(retVal);
 } //end getUrlVal
 
 function sboxDetails(response){
@@ -64,6 +64,6 @@ chrome.storage.local.get(null, function (result) {
     chrome.tabs.create({ url: "https://www.quali.com" });
   });
 
-  var token = decodeURIComponent(getUrlVal('token'));
+  var token = getUrlVal('token');
   getSbox(token, result["csuri"]);
 });
