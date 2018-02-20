@@ -36,7 +36,7 @@ function parseSboxList(resp, uriroot, portaluri, authToken) {
   tbl.classList.add("table");
   tbl.classList.add("table-hover");
   var thead = tbl.appendChild(document.createElement('thead'));
-  thead.innerHTML = "<tr><th>Sandbox Name</th><th>End Date</th><th>Status</th></tr>";
+  thead.innerHTML = "<tr><th>Sandbox Name</th><th>Info</th><th>End Date</th><th>Status</th></tr>";
   var tbody = tbl.appendChild(document.createElement('tbody'));
 
   var sbArray = JSON.parse(resp); 
@@ -49,15 +49,37 @@ function parseSboxList(resp, uriroot, portaluri, authToken) {
       // inside that is a badge on the right with sandbox status
       var row = tbody.appendChild(document.createElement('tr'));
       var cell1 = row.appendChild(document.createElement('td'));
+      var cellinfo = row.appendChild(document.createElement('td'));
       var cell2 = row.appendChild(document.createElement('td'));
       cell2.id = "cell2_"+ct;
       var cell3 = row.appendChild(document.createElement('td'));
 
       // set link
-      var a = cell1.appendChild(document.createElement('a'));
-      a.href = portaluri + "/RM/Diagram/Index/" + sb.id;
-      a.appendChild(document.createTextNode(sb.name));
-      a.addEventListener('click', onAnchorClick);
+      cell1.innerText = sb.name;
+      var btnl = cellinfo.appendChild(document.createElement('button'));
+      var btnd = cellinfo.appendChild(document.createElement('button'));
+      var btnls = btnl.appendChild(document.createElement('span'));
+      var btnds = btnd.appendChild(document.createElement('span'));
+      
+      btnl.classList.add("btn");
+      btnl.classList.add("btn-sm");
+      btnl.classList.add('btn-default');
+      btnd.classList.add("btn");
+      btnd.classList.add("btn-sm");
+      btnd.classList.add('btn-default');
+      btnls.classList.add("glyphicon");
+      btnls.classList.add("glyphicon-link")
+      btnds.classList.add("glyphicon");
+      btnds.classList.add("glyphicon-search");
+
+      btnl.addEventListener('click', function() {
+        chrome.tabs.create({ url: portaluri + "/RM/Diagram/Index/" + sb.id });
+        return false;
+      });
+
+      btnd.addEventListener('click', function() {
+        window.location = 'sbox.html?id='+sb.id+'&name='+sb.name;
+      });
 
       // do the state badge on right
       var s = cell3.appendChild(document.createElement('span'));
