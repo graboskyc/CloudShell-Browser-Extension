@@ -51,6 +51,6 @@ chrome.storage.local.get(null, function (result) {
   });
 
   var url = new URL(window.location);
-  var token = url.searchParams.get('token');
+  var token = decodeURIComponent(url.searchParams.get('token'));
   getSbox(token, result["csuri"]);
 });
