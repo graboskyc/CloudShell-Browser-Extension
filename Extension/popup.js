@@ -7,8 +7,8 @@ function onAnchorClick(event) {
 
 function updateSboxCell(resp, cell) {
   var obj = JSON.parse(resp);
-  var localEnd = new Date(obj.end_time).toLocaleString();
-  document.getElementById(cell).innerHTML = localEnd;
+  var localEnd = new Date(obj.end_time).toLocaleString('en-US',{hour12:false});
+  document.getElementById(cell).innerHTML = localEnd.replace(",","");
 }
 
 // make another callback with token to get more details on individual sandboxes
@@ -67,6 +67,8 @@ function parseSboxList(resp, uriroot, portaluri, authToken) {
       btnd.classList.add("btn");
       btnd.classList.add("btn-sm");
       btnd.classList.add('btn-default');
+      btnl.title = "Link to sandbox";
+      btnd.title = "Sandbox details";
       btnls.classList.add("glyphicon");
       btnls.classList.add("glyphicon-link")
       btnds.classList.add("glyphicon");

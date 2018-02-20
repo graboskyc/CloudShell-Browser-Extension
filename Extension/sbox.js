@@ -17,11 +17,13 @@ function sboxDetails(response){
   document.getElementById('jtitle').innerText = sboxname;
 
   sbObj.forEach(function(c) {
-    var row = tbody.appendChild(document.createElement("tr"));
-    var cell1 = row.appendChild(document.createElement("td"));
-    var cell2 = row.appendChild(document.createElement("td")); 
+    if ((c.component_type.toLowerCase().indexOf("port") == -1) && (c.component_type.toLowerCase().indexOf("chassis") == -1) && (c.component_type.toLowerCase().indexOf("module") == -1)) {
+      var row = tbody.appendChild(document.createElement("tr"));
+      var cell1 = row.appendChild(document.createElement("td"));
+      var cell2 = row.appendChild(document.createElement("td")); 
 
-    cell1.innerText = c.name;
+      cell1.innerText = c.name;
+    }
   });
 
 } // end sboxDetails
