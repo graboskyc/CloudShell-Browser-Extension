@@ -78,7 +78,7 @@ function parseSboxList(resp, uriroot, portaluri, authToken) {
       });
 
       btnd.addEventListener('click', function() {
-        window.location = 'sbox.html?id='+sb.id+'&name='+sb.name;
+        window.location = 'sbox.html?id='+sb.id+'&name='+sb.name+'&token='+authToken;
       });
 
       // do the state badge on right

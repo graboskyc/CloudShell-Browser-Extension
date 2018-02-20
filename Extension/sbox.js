@@ -50,26 +50,7 @@ chrome.storage.local.get(null, function (result) {
     chrome.tabs.create({ url: "https://www.quali.com" });
   });
 
-  // make first REST call to sandbox api to get auth token for future calls
-  var auth = '{"username":"'+result["csun"]+'","password":"'+result["cspw"]+'","domain":"'+result["csdom"]+'"}';
-  var xhr = new XMLHttpRequest();
-  xhr.open("PUT", result["csuri"]+"/api/login", true);
-  xhr.setRequestHeader("Content-Type","application/json");
-  xhr.onreadystatechange = function() {
-    console.log(xhr);
-    if (xhr.readyState == 4) {
-      // no response from server so API endpoint is misconfigured
-      if(xhr.responseText == "") {
-        document.getElementById('div_sboxlist').innerHTML = "Something is wrong with the API URL you you supplied. Log out and try again.";
-      }
-      // got response from server but authentication failed
-      else if (xhr.responseText.indexOf("Login failed for user") !== -1) {
-        document.getElementById('div_sboxlist').innerHTML = "Your username, password, or domain is wrong. Log out and try again.";
-      }
-      // everything worked so strip quote and slash chars from return value
-      // use that as the basic auth token and make next REST call to get sandboxes
-      getSbox(xhr.responseText.replace(/"/g,"").replace(/\\/g,""), result["csuri"]);
-    }
-  }
-  xhr.send(auth);
+  var url = new URL(window.location);
+  var token = url.searchParams.get('token');
+  getSbox(token, result["csuri"]);
 });
