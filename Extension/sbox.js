@@ -12,6 +12,26 @@ function getUrlVal(key){
   return decodeURIComponent(retVal);
 } //end getUrlVal
 
+function makeButton(type, parent, title, link) {
+  console.log(link);
+  var btn = parent.appendChild(document.createElement('button'));
+  btn.classList.add("btn");
+  btn.classList.add("btn-sm");
+  btn.classList.add('btn-default');
+  btn.title = title;
+
+  var s = btn.appendChild(document.createElement('span'));
+  s.classList.add("glyphicon");
+  s.classList.add("glyphicon-"+type);
+
+  btn.addEventListener('click', function() {
+    chrome.tabs.create({ url: link });
+    return false;
+  });
+
+  return btn;
+}
+
 function sboxDetails(response){
   console.log(response);
   // remove loading gif from div and create an unordered list
@@ -36,6 +56,21 @@ function sboxDetails(response){
       var cell2 = row.appendChild(document.createElement("td")); 
 
       cell1.innerText = c.name;
+
+      c.attributes.forEach(function(a) {
+        if(((a.name.toLowerCase().indexOf("web")!==-1) || (a.value.toLowerCase().indexOf("http") !==-1)) && (a.value.length > 1)) {
+          makeButton("link", cell2, a.name, a.value);
+        }
+        if(a.value.toLowerCase().indexOf("rdp") !==-1) {
+          makeButton("console", cell2, a.name, a.value);
+        }
+        if(a.value.toLowerCase().indexOf("ssh") !==-1) {
+          makeButton("console", cell2, a.name, a.value);
+        }
+        if(a.value.toLowerCase().indexOf("telnet") !==-1) {
+          makeButton("console", cell2, a.name, a.value);
+        }
+      });
     }
   });
 
